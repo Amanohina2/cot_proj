@@ -92,6 +92,75 @@ results/
 
 ---
 
+## Experimental Results (Preliminary)
+
+In this project, I conducted two simple experiments on Chain-of-Thought (CoT) reasoning using the model `moonshotai/kimi-k2.5` via an NVIDIA OpenAI-compatible API:
+
+- **Importance**: removing individual reasoning steps  
+- **Intervention**: perturbing the reasoning process and re-evaluating the answer  
+
+---
+
+### 1. Step Importance
+
+In the importance experiment (`importance.csv`), I tested 24 questions with a total of 81 perturbation records.
+
+Overall, about 48.1% of the cases resulted in a change in the final answer after removing a single step.
+
+I also noticed a clear pattern: earlier steps seem to be more important.
+
+- Step 0 removal →  
+93.3% change rate  
+
+- Step 1 removal →  
+63.6% 
+
+- Step 2 / 3 →  
+22.7%, 27.3%
+
+This suggests that the model may rely more heavily on earlier parts of the reasoning chain.
+
+---
+
+### 2. Intervention
+
+For the intervention experiment, I focused on a stricter subset (`intervention_strict.csv`), where only samples with  
+
+$$
+\text{new-source} = \text{model}
+$$  
+
+and non-unknown outputs were kept.
+
+In this setting, the unchanged ratio is 11.1%, which means 88.9% of perturbations lead to different final answers.
+
+This made me feel that the model is quite sensitive to changes in the reasoning process.
+
+---
+
+### 3. A small caveat
+
+However, I also found that if less strict samples (e.g., fallback cases such as `perturbed_last_number`) are included, the unchanged ratio increases to around 51.1%.
+
+This suggests that the results are somewhat sensitive to how we define valid interventions.
+
+---
+
+### 4. My current takeaway
+
+Overall, these results give me the impression that:
+
+- reasoning steps are not completely irrelevant  
+- but they are also not fully reliable as a causal mechanism  
+
+Instead, CoT reasoning might lie somewhere in between:
+
+$$
+\text{pattern-based behavior} \quad \text{and} \quad \text{causal reasoning}
+$$
+
+This is still very preliminary, but it made me think more carefully about what "reasoning" in LLMs actually means.
+
 ## P.S.
 
 This is just a small exploratory project, but it helped me think more carefully about what "reasoning" in LLMs really means:)
