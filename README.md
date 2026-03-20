@@ -2,14 +2,15 @@
 
 ## Motivation
 
-Recently I came across an interesting phenomenon in large language models:  
-even when the intermediate reasoning steps (Chain-of-Thought) contain mistakes, the final answer can still be correct.
+I became interested in this topic after seeing a project description that uses causal inference to study Chain-of-Thought reasoning in large language models.
+
+The idea that reasoning steps may not be causally responsible for the final answer was particularly intriguing to me. I had noticed similar cases where incorrect intermediate steps still lead to correct answers.
 
 This made me wonder:
 
-> Are these reasoning steps actually used by the model, or are they just “surface explanations”?
+> To what extent do reasoning steps actually influence the model's output?
 
-This project is a small attempt to explore that question from a more experimental perspective.
+This project is a small attempt to explore this question in a simple and experimental way.
 
 ---
 
